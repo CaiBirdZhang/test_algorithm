@@ -243,19 +243,29 @@ T BSTree<T>::maximum() {
 // 找结点(x)的后继结点。即，查找"二叉树中数据值大于该结点"的"最小结点",ceil。
 template <class T>
 BSTNode<T>* BSTree<T>::successor(BSTNode<T> *x) {
-    if (1) {
-
+    if (x->right != NULL) {
+        return minimum(x->right);
     }
-    return NULL;
+    BSTNode<T> parent = x->parent;
+    while (parent != NULL && parent->right == x) {
+        x = parent;
+        parent = x->parent;
+    }
+    return parent;
 }
 
 // 找结点(x)的前驱结点。即，查找"二叉树中数据值小于该结点"的"最大结点",floor。
 template <class T>
 BSTNode<T>* BSTree<T>::predecessor(BSTNode<T> *x) {
-    if (1) {
-
+    if (x->left != NULL) {
+        return maximum(x->left);
     }
-    return NULL;
+    BSTNode<T> parent = x->parent;
+    while (parent != NULL && parent->left == x) {
+        x = parent;
+        parent = x->parent;
+    }
+    return parent;
 }
 
 /*
