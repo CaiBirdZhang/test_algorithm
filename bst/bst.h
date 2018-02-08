@@ -2,6 +2,7 @@
 #define BST_H
 
 #include <iostream>
+#include <iomanip>
 #include <stack>
 
 using namespace std;
@@ -23,7 +24,7 @@ private:
     BSTNode<T> *mRoot;    // 根结点
 
 public:
-    BSTree() {}
+    BSTree() { mRoot = NULL; }
     ~BSTree() {}
 
     // 前序遍历"二叉树"
@@ -225,7 +226,7 @@ BSTNode<T>* BSTree<T>::maximum(BSTNode<T>* tree) {
     if (tree == NULL) {
         return NULL;
     }
-    while (tree != NULL) {
+    while (tree->right != NULL) {
         tree = tree->right;
     }
     return tree;
@@ -246,7 +247,7 @@ BSTNode<T>* BSTree<T>::successor(BSTNode<T> *x) {
     if (x->right != NULL) {
         return minimum(x->right);
     }
-    BSTNode<T> parent = x->parent;
+    BSTNode<T>* parent = x->parent;
     while (parent != NULL && parent->right == x) {
         x = parent;
         parent = x->parent;
@@ -260,7 +261,7 @@ BSTNode<T>* BSTree<T>::predecessor(BSTNode<T> *x) {
     if (x->left != NULL) {
         return maximum(x->left);
     }
-    BSTNode<T> parent = x->parent;
+    BSTNode<T>* parent = x->parent;
     while (parent != NULL && parent->left == x) {
         x = parent;
         parent = x->parent;
@@ -313,7 +314,7 @@ void BSTree<T>::insert(T key)
 
     // 如果新建结点失败，则返回。
     if ((z = new BSTNode<T>(key,NULL,NULL,NULL)) == NULL)
-        return ;
+        return;
 
     insert(mRoot, z);
 }
@@ -327,19 +328,80 @@ void BSTree<T>::insert(T key)
  */
 template <class T>
 BSTNode<T>* BSTree<T>::remove(BSTNode<T>* &tree, BSTNode<T> *z) {
-
+    BSTNode<T>* y = NULL;
+    BSTNode<T>* x = NULL;
+    // 后继节点
+    if (z->right == NULL || z->left == NULL) {
+        y = z;
+    } else {
+        y = successor(z);
+    }
+    // 后继节点子节点
+    if (y->left != NULL) {
+        x = y->left;
+    } else {
+        x = y->right;
+    }
+    // 子->父
+    if (x != NULL) {
+        x->parent = y->parent;
+    }
+    // 父->子
+    if (y->parent == NULL) {
+        tree = x;
+    } else if (y == y->parent->left) {
+        y->parent->left = x;
+    } else {
+        y->parent->right = x;
+    }
+    if (z != y) {
+        z->key = y->key;
+    }
+    return y;
 }
 // 删除结点(key为节点键值)
 template <class T>
-void BSTree<T>::remove(T key) {
+void BSTree<T>::remove(T key)
+{
+    BSTNode<T> *z, *node;
 
+    if ((z = search(mRoot, key)) != NULL)
+        if ( (node = remove(mRoot, z)) != NULL)
+            delete node;
 }
 
 // // 销毁二叉树
 // void destroy();
 
-// // 打印二叉树
-// void print();
+/*
+ * 打印"二叉查找树"
+ *
+ * key        -- 节点的键值
+ * direction  --  0，表示该节点是根节点;
+ *               -1，表示该节点是它的父结点的左孩子;
+ *                1，表示该节点是它的父结点的右孩子。
+ */
+template <class T>
+void BSTree<T>::print(BSTNode<T>* tree, T key, int direction)
+{
+    if(tree != NULL)
+    {
+        if(direction==0)    // tree是根节点
+            cout << setw(2) << tree->key << " is root" << endl;
+        else                // tree是分支节点
+            cout << setw(2) << tree->key << " is " << setw(2) << key << "'s "  << setw(12) << (direction==1?"right child" : "left child") << endl;
+
+        print(tree->left, tree->key, -1);
+        print(tree->right,tree->key,  1);
+    }
+}
+
+template <class T>
+void BSTree<T>::print()
+{
+    if (mRoot != NULL)
+        print(mRoot, mRoot->key, 0);
+}
 
 
 
