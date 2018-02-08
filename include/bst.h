@@ -15,7 +15,7 @@ public:
     BSTNode *parent;// 父结点
 
     BSTNode(T value, BSTNode *p, BSTNode *l, BSTNode *r):
-        key(value),parent(),left(l),right(r) {}
+        key(value),left(l),right(r),parent(p) {}
 };
 
 template <class T>
