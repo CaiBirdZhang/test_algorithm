@@ -4,17 +4,11 @@ using namespace std;
 void test_bst()
 {
     BSTree<int> bst;
-    bst.insert(3);
-    bst.insert(4);
-    bst.insert(10);
-    bst.insert(12);
-    bst.insert(7);
-    bst.insert(8);
-    bst.insert(9);
-    bst.insert(11);
-    bst.insert(-1);
-    bst.insert(0);
-    bst.insert(2);
+    int arr[] = {3,4,10,12,7,8,9,11,-1,0,2};
+    int size = sizeof(arr)/sizeof(int);
+    for (int i = 0; i < size; ++i) {
+        bst.insert(arr[i]);
+    }
 
     cout << "min key = " << bst.minimum() << endl;
     cout << "max key = " << bst.maximum() << endl;
@@ -49,5 +43,59 @@ void test_bst()
 
 }
 
+void test_avl() {
+    AVLTree<int> avl;
+    AVLTree<int>* tree = &avl;
+    int i,ilen;
+    int arr[] = {3,2,1,4,5,6,7,16,15,14,13,12,11,10,8,9};
+    cout << "== 依次添加: ";
+    ilen = sizeof(arr)/sizeof(int);
+    for(i=0; i<ilen; i++)
+    {
+        cout << arr[i] <<" ";
+        tree->insert(arr[i]);
+    }
 
+    cout << "\n== 前序遍历: ";
+    tree->preOrder();
+
+    cout << "\n== 中序遍历: ";
+    tree->inOrder();
+
+    cout << "\n== 后序遍历: ";
+    tree->postOrder();
+    cout << endl;
+
+    cout << "== 高度: " << tree->height() << endl;
+    cout << "== 最小值: " << tree->minimum() << endl;
+    cout << "== 最大值: " << tree->maximum() << endl;
+    cout << "== 树的详细信息: " << endl;
+    tree->print();
+
+    i = 8;
+    cout << "\n== 删除根节点: " << i;
+    tree->remove(i);
+
+    cout << "\n== 高度: " << tree->height() ;
+    cout << "\n== 中序遍历: " ;
+    tree->inOrder();
+    cout << "\n== 树的详细信息: " << endl;
+    tree->print();
+
+    i = 4;
+    cout << "\n== 删除根节点: " << i;
+    tree->remove(i);
+    i = 7;
+    cout << "\n== 删除根节点: " << i;
+    tree->remove(i);
+    i = 13;
+    cout << "\n== 删除根节点: " << i;
+    tree->remove(i);
+
+    cout << "\n== 高度: " << tree->height() ;
+    cout << "\n== 中序遍历: " ;
+    tree->inOrder();
+    cout << "\n== 树的详细信息: " << endl;
+    tree->print();
+}
 
