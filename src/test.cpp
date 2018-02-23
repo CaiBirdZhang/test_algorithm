@@ -99,3 +99,7 @@ void test_avl() {
     tree->print();
 }
 
+void test_rbTree() {
+
+}
+

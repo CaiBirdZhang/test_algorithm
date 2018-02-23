@@ -1,19 +1,26 @@
 #include "test.h"
 
-//#define _BST_
-#define _AVL_
+//#define TEST_BSTREE
+//#define TEST_AVLTREE
+#define TEST_RBTREE
 using namespace std;
 int main()
 {
-#ifdef _BST_
-    cout << "test bst begin....................................................." << endl;
+#ifdef TEST_BSTREE
+    cout << "test bstree begin....................................................." << endl;
     test_bst();
-    cout << "test bst end....................................................." << endl;
+    cout << "test bstree end....................................................." << endl;
 #endif
-#ifdef _AVL_
-    cout << "test avl begin....................................................." << endl;
+#ifdef TEST_AVLTREE
+    cout << "test avltree begin....................................................." << endl;
     test_avl();
-    cout << "test avl end....................................................." << endl;
+    cout << "test avltree end....................................................." << endl;
+#endif
+
+#ifdef TEST_RBTREE
+    cout << "test rbtree begin....................................................." << endl;
+    test_rbTree();
+    cout << "test rbtree end....................................................." << endl;
 #endif
 
 	return 0;
