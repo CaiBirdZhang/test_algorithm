@@ -1,9 +1,9 @@
 #ifndef TEST_H
 #define TEST_H
 
-#include "bst.h"
-#include "avl.h"
-#include "rbTree.h"
+#include "tree/bst.h"
+#include "tree/avl.h"
+#include "tree/rbTree.h"
 
 void test_bst();
 void test_avl();
