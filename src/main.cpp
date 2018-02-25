@@ -2,7 +2,7 @@
 
 //#define TEST_BSTREE
 //#define TEST_AVLTREE
-#define TEST_RBTREE
+//#define TEST_RBTREE
 using namespace std;
 int main()
 {
