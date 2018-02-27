@@ -169,3 +169,28 @@ void test_iterator_matrixUDG()
 
 }
 
+void test_sort()
+{
+    {
+        cout << "冒泡排序开始:" << endl;
+        int i;
+        int a[] = {20,40,30,10,60,50};
+        int ilen = (sizeof(a)) / (sizeof(a[0]));
+
+        cout << "before sort:";
+        for (i=0; i<ilen; i++)
+            cout << a[i] << " ";
+        cout << endl;
+
+        bubbleSort1(a, ilen);
+        //bubbleSort2(a, ilen);
+
+        cout << "after  sort:";
+        for (i=0; i<ilen; i++)
+            cout << a[i] << " ";
+        cout << endl;
+        cout << "冒泡排序开始:" << endl;
+    }
+
+
+}

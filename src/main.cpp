@@ -3,6 +3,7 @@
 //#define TEST_BSTREE
 //#define TEST_AVLTREE
 //#define TEST_RBTREE
+#define TEST_SORT
 using namespace std;
 int main()
 {
@@ -21,6 +22,12 @@ int main()
     cout << "test rbtree begin....................................................." << endl;
     test_rbTree();
     cout << "test rbtree end....................................................." << endl;
+#endif
+
+#ifdef TEST_SORT
+    cout << "test sort begin....................................................." << endl;
+    test_sort();
+    cout << "test sort end....................................................." << endl;
 #endif
 
 	return 0;

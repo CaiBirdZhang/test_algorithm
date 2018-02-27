@@ -3,10 +3,11 @@ DIR_SRC=./src
 DIR_BIN=./bin
 DIR_OBJ=./obj
 
-GRAPH_ITE=graph/iterator
+PATH_GRAPH_ITE=graph/iterator
+PATH_SORT=sort
 
 TARGET=${DIR_BIN}/main
-SRC=${wildcard ${DIR_SRC}/*.cpp} ${wildcard ${DIR_SRC}/${GRAPH_ITE}/*.cpp}
+SRC=${wildcard ${DIR_SRC}/*.cpp} ${wildcard ${DIR_SRC}/${PATH_GRAPH_ITE}/*.cpp} ${wildcard ${DIR_SRC}/${PATH_SORT}/*.cpp}
 OBJ=${patsubst %.cpp,${DIR_OBJ}/%.o,${notdir ${SRC}}}
 
 CC=g++
@@ -20,7 +21,10 @@ ${TARGET}:${OBJ}
 ${DIR_OBJ}/%.o:${DIR_SRC}/%.cpp
 	${CC} ${CFLAGS} -c $< -o $@
 #compile folder src/graph/iterator/
-${DIR_OBJ}/%.o:${DIR_SRC}/${GRAPH_ITE}/%.cpp
+${DIR_OBJ}/%.o:${DIR_SRC}/${PATH_GRAPH_ITE}/%.cpp
+	${CC} ${CFLAGS} -c $< -o $@
+#compile folder src/sort/
+${DIR_OBJ}/%.o:${DIR_SRC}/${PATH_SORT}/%.cpp
 	${CC} ${CFLAGS} -c $< -o $@
 
 clean:
