@@ -189,8 +189,32 @@ void test_sort()
         for (i=0; i<ilen; i++)
             cout << a[i] << " ";
         cout << endl;
-        cout << "冒泡排序开始:" << endl;
+        cout << "冒泡排序结束:" << endl;
     }
 
+    {
+        cout << "快速排序开始:" << endl;
+        int i;
+        int a[] = {30,40,60,10,20,50};
+        // int a[] = {10,20,30,40,50,60};
+        int ilen = (sizeof(a)) / (sizeof(a[0]));
 
+        cout << "before sort:";
+        for (i=0; i<ilen; i++)
+            cout << a[i] << " ";
+        cout << endl;
+
+        quickSort(a, 0, ilen-1);
+
+        cout << "after  sort:";
+        for (i=0; i<ilen; i++)
+            cout << a[i] << " ";
+        cout << endl;
+        cout << "快速排序结束:" << endl;
+    }
+
+    {}
+    {}
+    {}
+    {}
 }
