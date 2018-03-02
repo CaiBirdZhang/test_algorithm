@@ -213,8 +213,86 @@ void test_sort()
         cout << "快速排序结束:" << endl;
     }
 
-    {}
-    {}
-    {}
-    {}
+    {
+        cout << "直接插入排序开始:" << endl;
+        int i;
+        int a[] = {80,30,60,40,20,10,50,70};
+        int ilen = (sizeof(a)) / (sizeof(a[0]));
+
+        cout << "before sort:";
+        for (i=0; i<ilen; i++)
+            cout << a[i] << " ";
+        cout << endl;
+
+        insertSort(a, ilen);
+        //shellSort2(a, ilen);
+
+        cout << "after  sort:";
+        for (i=0; i<ilen; i++)
+            cout << a[i] << " ";
+        cout << endl;
+        cout << "直接插入排序结束:" << endl;
+    }
+
+    {
+        cout << "希尔排序开始:" << endl;
+        int i;
+        int a[] = {80,30,60,40,20,10,50,70};
+        int ilen = (sizeof(a)) / (sizeof(a[0]));
+
+        cout << "before sort:";
+        for (i=0; i<ilen; i++)
+            cout << a[i] << " ";
+        cout << endl;
+
+        shellSort1(a, ilen);
+        //shellSort2(a, ilen);
+
+        cout << "after  sort:";
+        for (i=0; i<ilen; i++)
+            cout << a[i] << " ";
+        cout << endl;
+        cout << "希尔排序结束:" << endl;
+    }
+
+    {
+        cout << "选择排序开始:" << endl;
+        int i;
+        int a[] = {20,40,30,10,60,50};
+        int ilen = (sizeof(a)) / (sizeof(a[0]));
+
+        cout << "before sort:";
+        for (i=0; i<ilen; i++)
+            cout << a[i] << " ";
+        cout << endl;
+
+        selectSort(a, ilen);
+
+        cout << "after  sort:";
+        for (i=0; i<ilen; i++)
+            cout << a[i] << " ";
+        cout << endl;
+        cout << "选择排序结束:" << endl;
+    }
+
+    {
+        cout << "归并排序开始:" << endl;
+        int i;
+        int a[] = {80,30,60,40,20,10,50,70};
+        int ilen = (sizeof(a)) / (sizeof(a[0]));
+
+        cout << "before sort:";
+        for (i=0; i<ilen; i++)
+            cout << a[i] << " ";
+        cout << endl;
+
+        mergeSortUp2Down(a, 0, ilen-1);        // 归并排序(从上往下)
+        //mergeSortDown2Up(a, ilen);            // 归并排序(从下往上)
+
+        cout << "after  sort:";
+        for (i=0; i<ilen; i++)
+            cout << a[i] << " ";
+        cout << endl;
+        cout << "归并排序结束:" << endl;
+    }
 }
