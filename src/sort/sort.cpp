@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 #include "sort/sort.h"
 
 using namespace std;
@@ -139,11 +140,45 @@ void selectSort(int* a, int n)
 // 稳定的算法
 void mergeSortUp2Down(int* a, int start, int end)
 {
+    if (a == NULL || start >= end)
+    {
+        return;
+    }
 
+    int mid = (start + end)/2;
+    // a[start...mid] 和 a[mid...end]是两个有序空间，
+    // 将它们排序成一个有序空间a[start...end]
+    mergeSortUp2Down(a, start, mid);
+    mergeSortUp2Down(a, mid + 1, end);
+    merge(a, start, mid, end);
 }
 void merge(int* a, int start, int mid, int end)
 {
-
+    int i = start;
+    int j = mid + 1;
+    int k = 0;
+    int* b = new int[end - start + 1];
+    while (i <= mid && j <= end)
+    {
+        if (a[i] <= a[j])
+        {
+            b[k++] = a[i++];
+        }
+        else
+        {
+            b[k++] = a[j++];
+        }
+    }
+    while (i <= mid)
+    {
+        b[k++] = a[i++];
+    }
+    while (j <= end)
+    {
+        b[k++] = a[j++];
+    }
+    memcpy(a + start, b, sizeof(int)*(end - start + 1));
+    delete[] b;
 }
 
 // 时间复杂度是O()

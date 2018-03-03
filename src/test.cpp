@@ -295,4 +295,24 @@ void test_sort()
         cout << endl;
         cout << "归并排序结束:" << endl;
     }
+
+    {
+        cout << "桶排序开始:" << endl;
+        int i;
+        int a[] = {80,30,60,40,20,10,50,70};
+        int ilen = (sizeof(a)) / (sizeof(a[0]));
+
+        cout << "before sort:";
+        for (i=0; i<ilen; i++)
+            cout << a[i] << " ";
+        cout << endl;
+
+        BucketSort(a, ilen);
+
+        cout << "after  sort:";
+        for (i=0; i<ilen; i++)
+            cout << a[i] << " ";
+        cout << endl;
+        cout << "桶排序结束:" << endl;
+    }
 }
