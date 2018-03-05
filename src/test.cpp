@@ -315,4 +315,25 @@ void test_sort()
         cout << endl;
         cout << "桶排序结束:" << endl;
     }
+
+    {
+        cout << "堆排序开始:" << endl;
+        int i;
+        int a[] = {20,30,90,40,70,110,60,10,100,50,80};
+        int ilen = (sizeof(a)) / (sizeof(a[0]));
+
+        cout << "before sort:";
+        for (i=0; i<ilen; i++)
+            cout << a[i] << " ";
+        cout << endl;
+
+        heapSortAsc(a, ilen);            // 升序排列
+        //heapSortDesc(a, ilen);        // 降序排列
+
+        cout << "after  sort:";
+        for (i=0; i<ilen; i++)
+            cout << a[i] << " ";
+        cout << endl;
+        cout << "堆排序结束:" << endl;
+    }
 }

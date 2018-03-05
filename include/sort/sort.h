@@ -34,5 +34,8 @@ void print(int arr[]);
 void printBuckets(struct Node *list);
 int getBucketIndex(int value);
 
+// 堆排序
+void heapSortAsc(int* a, int n);
+void sink(int* a, int start, int end);
 
 #endif

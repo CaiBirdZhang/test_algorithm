@@ -181,7 +181,7 @@ void merge(int* a, int start, int mid, int end)
     delete[] b;
 }
 
-// 时间复杂度是O()
+// 时间复杂度是O(N*lgN)
 //
 void BucketSort(int arr[], int n)
 {}
@@ -194,3 +194,50 @@ void printBuckets(struct Node *list)
 int getBucketIndex(int value)
 {}
 
+
+// 时间复杂度是O(N*lgN)
+// 不稳定的算法
+void heapSortAsc(int* a, int n)
+{
+    // 构建堆
+    for (int i = n/2 - 1; i >= 0; --i)
+    {
+        sink(a, i, n - 1);
+    }
+    // 获取堆顶(最大)元素，放入数组最后
+    // 重新调整堆
+    for (int i = n - 1; i > 0; --i)
+    {
+        // swap a[0]和a[i]
+        int max = a[0];
+        a[0] = a[i];
+        a[i] = max;
+        // 调整堆
+        sink(a, 0, i - 1);
+    }
+}
+void sink(int* a, int start, int end)
+{
+    int cur = start;
+    int left = cur*2 + 1;
+    int swapValue = a[cur];
+    for (; left <= end; cur = left, left = left*2+1)
+    {
+        // 获取左右孩子中的最大值的索引
+        if (left < end && a[left] < a[left + 1])
+        {
+            ++left;
+        }
+        if (swapValue >= a[left])
+        {
+            // 父节点>=子节点，退出
+            break;
+        }
+        else
+        {
+            // 位置调整
+            a[cur] = a[left];
+            a[left] = swapValue;
+        }
+    }
+}
