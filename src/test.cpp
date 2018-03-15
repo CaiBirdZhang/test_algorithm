@@ -159,16 +159,6 @@ void test_rbTree() {
 
 }
 
-void test_iterator_listUDG()
-{
-
-}
-
-void test_iterator_matrixUDG()
-{
-
-}
-
 void test_sort()
 {
     {
@@ -336,4 +326,40 @@ void test_sort()
         cout << endl;
         cout << "堆排序结束:" << endl;
     }
+}
+
+// graph
+void test_iterator_listUDG()
+{
+
+}
+
+void test_iterator_matrixUDG()
+{
+    char vexs[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
+    char edges[][2] = {
+        {'A', 'C'},
+        {'A', 'D'},
+        {'A', 'F'},
+        {'B', 'C'},
+        {'C', 'D'},
+        {'E', 'G'},
+        {'F', 'G'}};
+    int vlen = sizeof(vexs)/sizeof(vexs[0]);
+    int elen = sizeof(edges)/sizeof(edges[0]);
+    iterator_t::MatrixUDG* pG;
+
+    // 自定义"图"(输入矩阵队列)
+    //pG = new MatrixUDG();
+    // 采用已有的"图"
+    pG = new iterator_t::MatrixUDG(vexs, vlen, edges, elen);
+
+    pG->print();   // 打印图
+    cout << "Martix Graph DFS begin: " << endl;
+    pG->DFS();     // 深度优先遍历
+    cout << endl << "Martix Graph DFS end: " << endl;
+
+    cout << "Martix Graph BFS begin: " << endl;
+    pG->BFS();     // 广度优先遍历
+    cout << endl << "Martix Graph BFS end: " << endl;
 }

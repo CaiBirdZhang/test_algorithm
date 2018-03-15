@@ -1,6 +1,8 @@
 #include "graph/iterator/ListUDG.h"
 
-namespace iterator
+#include <iostream>
+
+namespace iterator_t
 {
 
 ListUDG::ListUDG()

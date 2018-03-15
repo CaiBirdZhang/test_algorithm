@@ -3,7 +3,8 @@
 //#define TEST_BSTREE
 //#define TEST_AVLTREE
 //#define TEST_RBTREE
-#define TEST_SORT
+//#define TEST_SORT
+#define TEST_GRAPH
 using namespace std;
 int main()
 {
@@ -28,6 +29,13 @@ int main()
     cout << "test sort begin....................................................." << endl;
     test_sort();
     cout << "test sort end....................................................." << endl;
+#endif
+
+#ifdef TEST_GRAPH
+    cout << "test graph begin....................................................." << endl;
+    test_iterator_matrixUDG();
+    test_iterator_listUDG();
+    cout << "test graph end....................................................." << endl;
 #endif
 
 	return 0;

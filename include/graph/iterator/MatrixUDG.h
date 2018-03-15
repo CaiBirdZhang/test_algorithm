@@ -1,7 +1,7 @@
 #ifndef ITERATOR_MATRIXUDG_H
 #define ITERATOR_MATRIXUDG_H
 
-namespace iterator
+namespace iterator_t
 {
 
 class MatrixUDG
@@ -19,7 +19,7 @@ public:
     MatrixUDG();
     // 创建图(用已提供的矩阵)
     MatrixUDG(char vexs[], int vlen, char edges[][2], int elen);
-    ~MatrixUDG();
+    ~MatrixUDG() {}
 
     // 深度优先搜索遍历图
     void DFS();
