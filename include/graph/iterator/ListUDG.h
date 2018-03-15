@@ -35,7 +35,7 @@ public:
     ListUDG();
     // 创建邻接表对应的图(用已提供的数据)
     ListUDG(char vexs[], int vlen, char edges[][2], int elen);
-    ~ListUDG();
+    ~ListUDG() {}
 
     // 深度优先搜索遍历图
     void DFS();
