@@ -331,7 +331,31 @@ void test_sort()
 // graph
 void test_iterator_listUDG()
 {
+    char vexs[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
+    char edges[][2] = {
+        {'A', 'C'},
+        {'A', 'D'},
+        {'A', 'F'},
+        {'B', 'C'},
+        {'C', 'D'},
+        {'E', 'G'},
+        {'F', 'G'}};
+    int vlen = sizeof(vexs)/sizeof(vexs[0]);
+    int elen = sizeof(edges)/sizeof(edges[0]);
+    iterator_t::ListUDG* pG;
 
+    // 自定义"图"(输入矩阵队列)
+    //pG = new ListUDG();
+    // 采用已有的"图"
+    pG = new iterator_t::ListUDG(vexs, vlen, edges, elen);
+    cout << endl;
+    pG->print();   // 打印图
+    cout << "List Graph DFS begin: " << endl;
+    pG->DFS();     // 深度优先遍历
+    cout << "List Graph DFS end: " << endl;
+    cout << "List Graph BFS begin: " << endl;
+    pG->BFS();     // 广度优先遍历
+    cout << "List Graph BFS end: " << endl;
 }
 
 void test_iterator_matrixUDG()
@@ -353,7 +377,6 @@ void test_iterator_matrixUDG()
     //pG = new MatrixUDG();
     // 采用已有的"图"
     pG = new iterator_t::MatrixUDG(vexs, vlen, edges, elen);
-
     pG->print();   // 打印图
     cout << "Martix Graph DFS begin: " << endl;
     pG->DFS();     // 深度优先遍历
