@@ -7,7 +7,8 @@
 enum RBTColor{RED, BLACK};
 
 template <class T>
-class RBTNode{
+class RBTNode
+{
     public:
         RBTColor color;    // 颜色
         T key;            // 关键字(键值)
@@ -20,7 +21,8 @@ class RBTNode{
 };
 
 template <class T>
-class RBTree {
+class RBTree
+{
     private:
         RBTNode<T> *mRoot;    // 根结点
 
@@ -110,19 +112,23 @@ class RBTree {
 
 // 前序遍历"二叉树"
 template <class T>
-void RBTree<T>::preOrder() {
+void RBTree<T>::preOrder()
+{
     RBTNode<T>* tmp = mRoot;
     stack<RBTNode<T>*> st;
     //st.push(tmp);
-    while ((tmp != NULL) || (!st.empty())) {
+    while ((tmp != NULL) || (!st.empty()))
+    {
         // get left children until end
-        while (tmp != NULL) {
+        while (tmp != NULL)
+         {
             cout << tmp->key << "  ";
             st.push(tmp);
             tmp = tmp->left;
         }
         // get a right child
-        if (!st.empty()) {
+        if (!st.empty())
+        {
             RBTNode<T>* parent = st.top();
             st.pop();
             tmp = parent->right;
@@ -132,18 +138,22 @@ void RBTree<T>::preOrder() {
 
 // 中序遍历"二叉树"
 template <class T>
-void RBTree<T>::inOrder() {
+void RBTree<T>::inOrder()
+{
     RBTNode<T>* tmp = mRoot;
     stack<RBTNode<T>*> st;
     //st.push(tmp);
-    while ((tmp != NULL) || (!st.empty())) {
+    while ((tmp != NULL) || (!st.empty()))
+    {
         // get left children until end
-        while (tmp != NULL) {
+        while (tmp != NULL)
+        {
             st.push(tmp);
             tmp = tmp->left;
         }
         // get a right child
-        if (!st.empty()) {
+        if (!st.empty())
+        {
             RBTNode<T>* parent = st.top();
             st.pop();
             cout << parent->key << "  ";
@@ -154,7 +164,8 @@ void RBTree<T>::inOrder() {
 
 // 后序遍历"二叉树"
 template <class T>
-void RBTree<T>::postOrder() {
+void RBTree<T>::postOrder()
+{
     RBTNode<T>* cur = mRoot;
     RBTNode<T>* pre = NULL;
     stack<RBTNode<T>*> st;
@@ -163,18 +174,19 @@ void RBTree<T>::postOrder() {
         cur = st.top();
         // no children or already access the children
         if ((cur->left == NULL && cur->right == NULL) ||
-            (pre != NULL && (pre == cur->left || pre == cur->right))) {
+            (pre != NULL && (pre == cur->left || pre == cur->right)))
+        {
             cout << cur->key << "  ";
             st.pop();
             pre = cur;
-        } else {
+        }
+        else
+        {
             // put right and left child
-            if (cur->right != NULL) {
+            if (cur->right != NULL)
                 st.push(cur->right);
-            }
-            if (cur->left != NULL) {
+            if (cur->left != NULL)
                 st.push(cur->left);
-            }
         }
     }
 }
@@ -441,11 +453,12 @@ void RBTree<T>::rightRotate(RBTNode<T>* &root, RBTNode<T>* y)
 
 // 将结点(key为节点键值)插入到红黑树中
 template <class T>
-void RBTree<T>::insert(T key) {
+void RBTree<T>::insert(T key)
+{
     RBTNode<T>* z = new RBTNode<T>(key, RED, NULL, NULL, NULL);
-    if (z == NULL) {
+    if (z == NULL)
         return;
-    }
+
     insert(mRoot, z);
 }
 /*
@@ -579,52 +592,53 @@ void RBTree<T>::insertFixUp(RBTNode<T>* &root, RBTNode<T>* node)
 
 // 删除结点(key为节点键值)
 template <class T>
-void RBTree<T>::remove(T key) {
+void RBTree<T>::remove(T key)
+{
     RBTNode<T>* z = search(key);
-    if (z == NULL) {
+    if (z == NULL)
         return;
-    }
+
     remove(mRoot, z);
 }
 // 删除函数
 template <class T>
-void RBTree<T>::remove(RBTNode<T>* &root, RBTNode<T> *node) {
+void RBTree<T>::remove(RBTNode<T>* &root, RBTNode<T> *node)
+{
     // 后继节点
     RBTNode<T>* y;
-    if (node->left == NULL || node->right == NULL) {
+    if (node->left == NULL || node->right == NULL)
         y = node;
-    } else {
+    else
         y = successor(node);
-    }
+
     // 子节点
     RBTNode<T>* x;
-    if (y->left != NULL) {
+    if (y->left != NULL)
         x = y->left;
-    } else {
+    else
         x = y->right;
-    }
+
     // 下到上
-    if (x != NULL) {
+    if (x != NULL)
         x->parent = y->parent;
-    }
+
     // 上到下
-    if (y->parent == NULL) {
+    if (y->parent == NULL)
         root = x;
-    } else {
-        if (y->parent->left == y) {
+    else {
+        if (y->parent->left == y)
             y->parent->left = x;
-        } else {
+        else
             y->parent->right = x;
-        }
     }
     // 后继节点key替换node的key
-    if (node != y) {
+    if (node != y)
         node->key = y->key;
-    }
+
     // 删除节点是黑色，重新调整
-    if (y->color == BLACK) {
+    if (y->color == BLACK)
         removeFixUp(root, x, y->parent);
-    }
+
     delete y;
 }
 /*

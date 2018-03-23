@@ -8,7 +8,8 @@
 using namespace std;
 
 template <class T>
-class AVLTreeNode{
+class AVLTreeNode
+{
     public:
         T key;                // 关键字(键值)
         int height;         // 高度
@@ -20,7 +21,8 @@ class AVLTreeNode{
 };
 
 template <class T>
-class AVLTree {
+class AVLTree
+{
     private:
         AVLTreeNode<T> *mRoot;    // 根结点
 
@@ -109,13 +111,15 @@ class AVLTree {
 
 // 获取树的高度
 template <class T>
-int AVLTree<T>::height() {
+int AVLTree<T>::height()
+{
     return height(mRoot);
 }
 
 // 获取树的高度
 template <class T>
-int AVLTree<T>::height(AVLTreeNode<T>* tree) {
+int AVLTree<T>::height(AVLTreeNode<T>* tree)
+{
     if (tree != NULL)
         return tree->height;
 
@@ -130,19 +134,23 @@ int AVLTree<T>::max(int a, int b)
 
 // 前序遍历"AVL树"
 template <class T>
-void AVLTree<T>::preOrder() {
+void AVLTree<T>::preOrder()
+{
     AVLTreeNode<T>* tmp = mRoot;
     stack<AVLTreeNode<T>*> st;
     //st.push(tmp);
-    while ((tmp != NULL) || (!st.empty())) {
+    while ((tmp != NULL) || (!st.empty()))
+    {
         // get left children until end
-        while (tmp != NULL) {
+        while (tmp != NULL)
+        {
             cout << tmp->key << "  ";
             st.push(tmp);
             tmp = tmp->left;
         }
         // get a right child
-        if (!st.empty()) {
+        if (!st.empty())
+        {
             AVLTreeNode<T>* parent = st.top();
             st.pop();
             tmp = parent->right;
@@ -152,18 +160,22 @@ void AVLTree<T>::preOrder() {
 
 // 中序遍历"AVL树"
 template <class T>
-void AVLTree<T>::inOrder() {
+void AVLTree<T>::inOrder()
+{
     AVLTreeNode<T>* tmp = mRoot;
     stack<AVLTreeNode<T>*> st;
     //st.push(tmp);
-    while ((tmp != NULL) || (!st.empty())) {
+    while ((tmp != NULL) || (!st.empty()))
+    {
         // get left children until end
-        while (tmp != NULL) {
+        while (tmp != NULL)
+        {
             st.push(tmp);
             tmp = tmp->left;
         }
         // get a right child
-        if (!st.empty()) {
+        if (!st.empty())
+        {
             AVLTreeNode<T>* parent = st.top();
             st.pop();
             cout << parent->key << "  ";
@@ -174,7 +186,8 @@ void AVLTree<T>::inOrder() {
 
 // 后序遍历"AVL树"
 template <class T>
-void AVLTree<T>::postOrder() {
+void AVLTree<T>::postOrder()
+{
     AVLTreeNode<T>* cur = mRoot;
     AVLTreeNode<T>* pre = NULL;
     stack<AVLTreeNode<T>*> st;
@@ -183,30 +196,33 @@ void AVLTree<T>::postOrder() {
         cur = st.top();
         // no children or already access the children
         if ((cur->left == NULL && cur->right == NULL) ||
-            (pre != NULL && (pre == cur->left || pre == cur->right))) {
+            (pre != NULL && (pre == cur->left || pre == cur->right)))
+        {
             cout << cur->key << "  ";
             st.pop();
             pre = cur;
-        } else {
+        }
+        else
+        {
             // put right and left child
-            if (cur->right != NULL) {
+            if (cur->right != NULL)
                 st.push(cur->right);
-            }
-            if (cur->left != NULL) {
+            if (cur->left != NULL)
                 st.push(cur->left);
-            }
         }
     }
 }
 
 // (递归实现)查找"AVL树"中键值为key的节点
 template <class T>
-AVLTreeNode<T>* AVLTree<T>::search(T key) {
+AVLTreeNode<T>* AVLTree<T>::search(T key)
+{
     return search(mRoot, key);
 }
 // (递归实现)查找"AVL树x"中键值为key的节点
 template <class T>
-AVLTreeNode<T>* AVLTree<T>::search(AVLTreeNode<T>* x, T key) const {
+AVLTreeNode<T>* AVLTree<T>::search(AVLTreeNode<T>* x, T key) const
+{
     if (x == NULL || x->key == key)
         return x;
 
@@ -218,63 +234,69 @@ AVLTreeNode<T>* AVLTree<T>::search(AVLTreeNode<T>* x, T key) const {
 
 // (非递归实现)查找"AVL树"中键值为key的节点
 template <class T>
-AVLTreeNode<T>* AVLTree<T>::iterativeSearch(T key) {
+AVLTreeNode<T>* AVLTree<T>::iterativeSearch(T key)
+{
     return iterativeSearch(mRoot, key);
 }
 // (非递归实现)查找"AVL树x"中键值为key的节点
 template <class T>
-AVLTreeNode<T>* AVLTree<T>::iterativeSearch(AVLTreeNode<T>* x, T key) const {
-    while (x != NULL) {
-        if (key < x->key) {
+AVLTreeNode<T>* AVLTree<T>::iterativeSearch(AVLTreeNode<T>* x, T key) const
+{
+    while (x != NULL)
+    {
+        if (key < x->key)
             x = x->left;
-        } else if (key > x->key) {
+        else if (key > x->key)
             x = x->right;
-        } else {
+        else
             break;
-        }
     }
     return x;
 }
 
 // 查找最小结点：返回最小结点的键值。
 template <class T>
-T AVLTree<T>::minimum() {
+T AVLTree<T>::minimum()
+{
     AVLTreeNode<T>* tmp = minimum(mRoot);
-    if (tmp != NULL) {
+    if (tmp != NULL)
         return tmp->key;
-    }
+
     return static_cast<T>(0);
 }
 // 查找最小结点：返回tree为根结点的AVL树的最小结点。
 template <class T>
-AVLTreeNode<T>* AVLTree<T>::minimum(AVLTreeNode<T>* tree){
-    if (tree == NULL) {
+AVLTreeNode<T>* AVLTree<T>::minimum(AVLTreeNode<T>* tree)
+{
+    if (tree == NULL)
         return NULL;
-    }
-    while (tree->left != NULL) {
+
+    while (tree->left != NULL)
         tree = tree->left;
-    }
+
     return tree;
 }
 
 // 查找最大结点：返回最大结点的键值。
 template <class T>
-T AVLTree<T>::maximum() {
+T AVLTree<T>::maximum()
+{
     AVLTreeNode<T>* tmp = maximum(mRoot);
-    if (tmp != NULL) {
+    if (tmp != NULL)
         return tmp->key;
-    }
+
     return static_cast<T>(0);
 }
 // 查找最大结点：返回tree为根结点的AVL树的最大结点。
 template <class T>
-AVLTreeNode<T>* AVLTree<T>::maximum(AVLTreeNode<T>* tree) {
-    if (tree == NULL) {
+AVLTreeNode<T>* AVLTree<T>::maximum(AVLTreeNode<T>* tree)
+{
+    if (tree == NULL)
         return NULL;
-    }
-    while (tree->right != NULL) {
+
+    while (tree->right != NULL)
         tree = tree->right;
-    }
+
     return tree;
 }
 
@@ -302,7 +324,8 @@ void AVLTree<T>::print()
 
 // LL：左左对应的情况(左单旋转)。
 template <class T>
-AVLTreeNode<T>* AVLTree<T>::leftLeftRotation(AVLTreeNode<T>* k2) {
+AVLTreeNode<T>* AVLTree<T>::leftLeftRotation(AVLTreeNode<T>* k2)
+{
     AVLTreeNode<T>* k1 = k2->left;
     // down to up
     k2->left = k1->right;
@@ -316,7 +339,8 @@ AVLTreeNode<T>* AVLTree<T>::leftLeftRotation(AVLTreeNode<T>* k2) {
 
 // RR：右右对应的情况(右单旋转)。
 template <class T>
-AVLTreeNode<T>* AVLTree<T>::rightRightRotation(AVLTreeNode<T>* k1) {
+AVLTreeNode<T>* AVLTree<T>::rightRightRotation(AVLTreeNode<T>* k1)
+{
     AVLTreeNode<T>* k2 = k1->right;
     // down to up
     k1->right = k2->left;
@@ -330,26 +354,30 @@ AVLTreeNode<T>* AVLTree<T>::rightRightRotation(AVLTreeNode<T>* k1) {
 
 // LR：左右对应的情况(左双旋转)。
 template <class T>
-AVLTreeNode<T>* AVLTree<T>::leftRightRotation(AVLTreeNode<T>* k3) {
+AVLTreeNode<T>* AVLTree<T>::leftRightRotation(AVLTreeNode<T>* k3)
+{
     k3->left = rightRightRotation(k3->left);
     return leftLeftRotation(k3);
 }
 
 // RL：右左对应的情况(右双旋转)。
 template <class T>
-AVLTreeNode<T>* AVLTree<T>::rightLeftRotation(AVLTreeNode<T>* k1) {
+AVLTreeNode<T>* AVLTree<T>::rightLeftRotation(AVLTreeNode<T>* k1)
+{
     k1->right = leftLeftRotation(k1->right);
     return rightRightRotation(k1);
 }
 
 // 将结点(key为节点键值)插入到AVL树中
 template <class T>
-void AVLTree<T>::insert(T key) {
+void AVLTree<T>::insert(T key)
+{
     insert(mRoot, key);
 }
 // 将结点(z)插入到AVL树(tree)中
 template <class T>
-AVLTreeNode<T>* AVLTree<T>::insert(AVLTreeNode<T>* &tree, T key) {
+AVLTreeNode<T>* AVLTree<T>::insert(AVLTreeNode<T>* &tree, T key)
+{
     if (tree == NULL)
     {
         // 新建节点
@@ -396,15 +424,18 @@ AVLTreeNode<T>* AVLTree<T>::insert(AVLTreeNode<T>* &tree, T key) {
 
 // 删除结点(key为节点键值)
 template <class T>
-void AVLTree<T>::remove(T key) {
+void AVLTree<T>::remove(T key)
+{
     AVLTreeNode<T>* search_ret = iterativeSearch(key);
-    if (search_ret != NULL) {
+    if (search_ret != NULL)
+    {
         mRoot = remove(mRoot, search_ret);
     }
 }
 // 删除AVL树(tree)中的结点(z)，并返回被删除的结点
 template <class T>
-AVLTreeNode<T>* AVLTree<T>::remove(AVLTreeNode<T>* &tree, AVLTreeNode<T>* z) {
+AVLTreeNode<T>* AVLTree<T>::remove(AVLTreeNode<T>* &tree, AVLTreeNode<T>* z)
+ {
     // 根为空 或者 没有要删除的节点，直接返回NULL。
     if (tree==NULL || z==NULL)
         return NULL;

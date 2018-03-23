@@ -7,7 +7,8 @@
 
 using namespace std;
 template <class T>
-class BSTNode{
+class BSTNode
+{
 public:
     T key;            // 关键字(键值)
     BSTNode *left;    // 左孩子
@@ -19,7 +20,8 @@ public:
 };
 
 template <class T>
-class BSTree {
+class BSTree
+{
 private:
     BSTNode<T> *mRoot;    // 根结点
 
@@ -93,19 +95,23 @@ private:
 
 // 前序遍历"二叉树"
 template <class T>
-void BSTree<T>::preOrder() {
+void BSTree<T>::preOrder()
+{
     BSTNode<T>* tmp = mRoot;
     stack<BSTNode<T>*> st;
     //st.push(tmp);
-    while ((tmp != NULL) || (!st.empty())) {
+    while ((tmp != NULL) || (!st.empty()))
+    {
         // get left children until end
-        while (tmp != NULL) {
+        while (tmp != NULL)
+        {
             cout << tmp->key << "  ";
             st.push(tmp);
             tmp = tmp->left;
         }
         // get a right child
-        if (!st.empty()) {
+        if (!st.empty())
+        {
             BSTNode<T>* parent = st.top();
             st.pop();
             tmp = parent->right;
@@ -115,18 +121,22 @@ void BSTree<T>::preOrder() {
 
 // 中序遍历"二叉树"
 template <class T>
-void BSTree<T>::inOrder() {
+void BSTree<T>::inOrder()
+{
     BSTNode<T>* tmp = mRoot;
     stack<BSTNode<T>*> st;
     //st.push(tmp);
-    while ((tmp != NULL) || (!st.empty())) {
+    while ((tmp != NULL) || (!st.empty()))
+    {
         // get left children until end
-        while (tmp != NULL) {
+        while (tmp != NULL)
+        {
             st.push(tmp);
             tmp = tmp->left;
         }
         // get a right child
-        if (!st.empty()) {
+        if (!st.empty())
+        {
             BSTNode<T>* parent = st.top();
             st.pop();
             cout << parent->key << "  ";
@@ -137,27 +147,30 @@ void BSTree<T>::inOrder() {
 
 // 后序遍历"二叉树"
 template <class T>
-void BSTree<T>::postOrder() {
+void BSTree<T>::postOrder()
+{
     BSTNode<T>* cur = mRoot;
     BSTNode<T>* pre = NULL;
     stack<BSTNode<T>*> st;
     st.push(cur);
-    while (!st.empty()) {
+    while (!st.empty())
+    {
         cur = st.top();
         // no children or already access the children
         if ((cur->left == NULL && cur->right == NULL) ||
-            (pre != NULL && (pre == cur->left || pre == cur->right))) {
+            (pre != NULL && (pre == cur->left || pre == cur->right)))
+        {
             cout << cur->key << "  ";
             st.pop();
             pre = cur;
-        } else {
+        }
+        else
+        {
             // put right and left child
-            if (cur->right != NULL) {
+            if (cur->right != NULL)
                 st.push(cur->right);
-            }
-            if (cur->left != NULL) {
+            if (cur->left != NULL)
                 st.push(cur->left);
-            }
         }
     }
 }
@@ -168,7 +181,6 @@ BSTNode<T>* BSTree<T>::search(BSTNode<T>* x, T key) const
 {
     if (x == NULL || x->key == key)
         return x;
-
     if (key < x->key)
         return search(x->left, key);
     else
@@ -182,73 +194,81 @@ BSTNode<T>* BSTree<T>::search(T key)
 
 // (非递归实现)查找"二叉树x"中键值为key的节点
 template <class T>
-BSTNode<T>* BSTree<T>::iterativeSearch(BSTNode<T>* x, T key) const {
-    while (x != NULL) {
-        if (key < x->key) {
+BSTNode<T>* BSTree<T>::iterativeSearch(BSTNode<T>* x, T key) const
+{
+    while (x != NULL)
+    {
+        if (key < x->key)
             x = x->left;
-        } else if (key > x->key) {
+        else if (key > x->key)
             x = x->right;
-        } else {
+        else
             break;
-        }
     }
     return x;
 }
 template <class T>
-BSTNode<T>* BSTree<T>::iterativeSearch(T key) {
+BSTNode<T>* BSTree<T>::iterativeSearch(T key)
+{
     return iterativeSearch(mRoot, key);
 }
 
 // 查找最小结点：返回tree为根结点的二叉树的最小结点。
 template <class T>
-BSTNode<T>* BSTree<T>::minimum(BSTNode<T>* tree) {
-    if (tree == NULL) {
+BSTNode<T>* BSTree<T>::minimum(BSTNode<T>* tree)
+{
+    if (tree == NULL)
         return NULL;
-    }
-    while (tree->left != NULL) {
+
+    while (tree->left != NULL)
         tree = tree->left;
-    }
+
     return tree;
 }
 // 查找最小结点：返回最小结点的键值。
 template <class T>
-T BSTree<T>::minimum() {
+T BSTree<T>::minimum()
+{
     BSTNode<T>* tmp = minimum(mRoot);
-    if (tmp != NULL) {
+    if (tmp != NULL)
         return tmp->key;
-    }
+
     return static_cast<T>(0);
 }
 
 // 查找最大结点：返回tree为根结点的二叉树的最大结点。
 template <class T>
-BSTNode<T>* BSTree<T>::maximum(BSTNode<T>* tree) {
-    if (tree == NULL) {
+BSTNode<T>* BSTree<T>::maximum(BSTNode<T>* tree)
+{
+    if (tree == NULL)
         return NULL;
-    }
-    while (tree->right != NULL) {
+
+    while (tree->right != NULL)
         tree = tree->right;
-    }
+
     return tree;
 }
 // 查找最大结点：返回最大结点的键值。
 template <class T>
-T BSTree<T>::maximum() {
+T BSTree<T>::maximum()
+{
     BSTNode<T>* tmp = maximum(mRoot);
-    if (tmp != NULL) {
+    if (tmp != NULL)
         return tmp->key;
-    }
+
     return static_cast<T>(0);
 }
 
 // 找结点(x)的后继结点。即，查找"二叉树中数据值大于该结点"的"最小结点",ceil。
 template <class T>
-BSTNode<T>* BSTree<T>::successor(BSTNode<T> *x) {
-    if (x->right != NULL) {
+BSTNode<T>* BSTree<T>::successor(BSTNode<T> *x)
+{
+    if (x->right != NULL)
         return minimum(x->right);
-    }
+
     BSTNode<T>* parent = x->parent;
-    while (parent != NULL && parent->right == x) {
+    while (parent != NULL && parent->right == x)
+    {
         x = parent;
         parent = x->parent;
     }
@@ -257,12 +277,14 @@ BSTNode<T>* BSTree<T>::successor(BSTNode<T> *x) {
 
 // 找结点(x)的前驱结点。即，查找"二叉树中数据值小于该结点"的"最大结点",floor。
 template <class T>
-BSTNode<T>* BSTree<T>::predecessor(BSTNode<T> *x) {
-    if (x->left != NULL) {
+BSTNode<T>* BSTree<T>::predecessor(BSTNode<T> *x)
+{
+    if (x->left != NULL)
         return maximum(x->left);
-    }
+
     BSTNode<T>* parent = x->parent;
-    while (parent != NULL && parent->left == x) {
+    while (parent != NULL && parent->left == x)
+    {
         x = parent;
         parent = x->parent;
     }
@@ -331,32 +353,32 @@ BSTNode<T>* BSTree<T>::remove(BSTNode<T>* &tree, BSTNode<T> *z) {
     BSTNode<T>* y = NULL;
     BSTNode<T>* x = NULL;
     // 后继节点
-    if (z->right == NULL || z->left == NULL) {
+    if (z->right == NULL || z->left == NULL)
         y = z;
-    } else {
+    else
         y = successor(z);
-    }
+
     // 后继节点子节点
-    if (y->left != NULL) {
+    if (y->left != NULL)
         x = y->left;
-    } else {
+    else
         x = y->right;
-    }
+
     // 子->父
-    if (x != NULL) {
+    if (x != NULL)
         x->parent = y->parent;
-    }
+
     // 父->子
-    if (y->parent == NULL) {
+    if (y->parent == NULL)
         tree = x;
-    } else if (y == y->parent->left) {
+    else if (y == y->parent->left)
         y->parent->left = x;
-    } else {
+    else
         y->parent->right = x;
-    }
-    if (z != y) {
+
+    if (z != y)
         z->key = y->key;
-    }
+
     return y;
 }
 // 删除结点(key为节点键值)

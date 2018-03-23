@@ -4,7 +4,7 @@
 //#define TEST_AVLTREE
 //#define TEST_RBTREE
 //#define TEST_SORT
-#define TEST_GRAPH
+//#define TEST_GRAPH
 using namespace std;
 int main()
 {
