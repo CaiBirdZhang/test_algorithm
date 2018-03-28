@@ -43,6 +43,8 @@ public:
     void BFS();
     // 打印邻接表图
     void print();
+    // 拓扑排序
+    int topologicalSort();
 
 private:
     // 读取一个输入字符

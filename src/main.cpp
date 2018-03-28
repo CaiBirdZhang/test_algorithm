@@ -4,7 +4,7 @@
 //#define TEST_AVLTREE
 //#define TEST_RBTREE
 //#define TEST_SORT
-//#define TEST_GRAPH
+#define TEST_GRAPH
 using namespace std;
 int main()
 {
@@ -33,8 +33,9 @@ int main()
 
 #ifdef TEST_GRAPH
     cout << "test graph begin....................................................." << endl;
-    test_iterator_matrixUDG();
-    test_iterator_listUDG();
+    //test_iterator_matrixUDG();
+    //test_iterator_listUDG();
+    test_dijkstra_listUDG();
     cout << "test graph end....................................................." << endl;
 #endif
 

@@ -386,3 +386,44 @@ void test_iterator_matrixUDG()
     pG->BFS();     // 广度优先遍历
     cout << endl << "Martix Graph BFS end: " << endl;
 }
+
+void test_dijkstra_listUDG()
+{
+    int prev[100] = {0};
+    int dist[100] = {0};
+    // 顶点
+    char vexs[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
+    // 边
+    dijkstra::EData *edges[] = {
+               // 起点 终点 权
+        new dijkstra::EData('A', 'B', 12),
+        new dijkstra::EData('A', 'F', 16),
+        new dijkstra::EData('A', 'G', 14),
+        new dijkstra::EData('B', 'C', 10),
+        new dijkstra::EData('B', 'F',  7),
+        new dijkstra::EData('C', 'D',  3),
+        new dijkstra::EData('C', 'E',  5),
+        new dijkstra::EData('C', 'F',  6),
+        new dijkstra::EData('D', 'E',  4),
+        new dijkstra::EData('E', 'F',  2),
+        new dijkstra::EData('E', 'G',  8),
+        new dijkstra::EData('F', 'G',  9),
+    };
+    int vlen = sizeof(vexs)/sizeof(vexs[0]);
+    int elen = sizeof(edges)/sizeof(edges[0]);
+    dijkstra::ListUDG* pG;
+
+    // 自定义"图"(输入矩阵队列)
+    //pG = new ListUDG();
+    // 采用已有的"图"
+    pG = new dijkstra::ListUDG(vexs, vlen, edges, elen);
+
+    //pG->print();   // 打印图
+    //pG->DFS();     // 深度优先遍历
+    //pG->BFS();     // 广度优先遍历
+    //pG->prim(0);   // prim算法生成最小生成树
+    //pG->kruskal(); // Kruskal算法生成最小生成树
+
+    // dijkstra算法获取"第4个顶点"到其它各个顶点的最短距离
+    pG->dijkstra(3, prev, dist);
+}
