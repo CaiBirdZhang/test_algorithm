@@ -350,12 +350,12 @@ void test_iterator_listUDG()
     pG = new iterator_t::ListUDG(vexs, vlen, edges, elen);
     cout << endl;
     pG->print();   // 打印图
-    cout << "List Graph DFS begin: " << endl;
+    cout << "ListUDG Graph DFS begin: " << endl;
     pG->DFS();     // 深度优先遍历
-    cout << "List Graph DFS end: " << endl;
-    cout << "List Graph BFS begin: " << endl;
+    cout << "ListUDG Graph DFS end: " << endl;
+    cout << "ListUDG Graph BFS begin: " << endl;
     pG->BFS();     // 广度优先遍历
-    cout << "List Graph BFS end: " << endl;
+    cout << "ListUDG Graph BFS end: " << endl;
 }
 
 void test_iterator_matrixUDG()
@@ -378,13 +378,13 @@ void test_iterator_matrixUDG()
     // 采用已有的"图"
     pG = new iterator_t::MatrixUDG(vexs, vlen, edges, elen);
     pG->print();   // 打印图
-    cout << "Martix Graph DFS begin: " << endl;
+    cout << "MartixUDG Graph DFS begin: " << endl;
     pG->DFS();     // 深度优先遍历
-    cout << endl << "Martix Graph DFS end: " << endl;
+    cout << endl << "MartixUDG Graph DFS end: " << endl;
 
-    cout << "Martix Graph BFS begin: " << endl;
+    cout << "MartixUDG Graph BFS begin: " << endl;
     pG->BFS();     // 广度优先遍历
-    cout << endl << "Martix Graph BFS end: " << endl;
+    cout << endl << "MartixUDG Graph BFS end: " << endl;
 }
 
 void test_iterator_listDG()
@@ -410,7 +410,9 @@ void test_iterator_listDG()
     pG->print();   // 打印图
     //pG->DFS();     // 深度优先遍历
     //pG->BFS();     // 广度优先遍历
+    cout << "listDG Graph topologicalSort begin: " << endl;
     pG->topologicalSort();     // 拓扑排序
+    cout << "listDG Graph topologicalSort end: " << endl;
 }
 
 void test_dijkstra_listUDG()
@@ -447,9 +449,17 @@ void test_dijkstra_listUDG()
     //pG->print();   // 打印图
     //pG->DFS();     // 深度优先遍历
     //pG->BFS();     // 广度优先遍历
-    //pG->prim(0);   // prim算法生成最小生成树
-    //pG->kruskal(); // Kruskal算法生成最小生成树
+    cout << "ListUDG Graph prim begin: " << endl;
+    pG->prim(0);   // prim算法生成最小生成树
+    cout << "ListUDG Graph prim end: " << endl;
 
+    cout << "ListUDG Graph kruskal begin: " << endl;
+    pG->kruskal(); // Kruskal算法生成最小生成树
+    cout << "ListUDG Graph kruskal end: " << endl;
+
+    cout << "ListUDG Graph dijkstra begin: " << endl;
     // dijkstra算法获取"第4个顶点"到其它各个顶点的最短距离
     pG->dijkstra(3, prev, dist);
+    cout << "ListUDG Graph dijkstra end: " << endl;
 }
+

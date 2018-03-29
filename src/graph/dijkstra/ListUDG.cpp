@@ -163,8 +163,24 @@ void ListUDG::dijkstra(int vs, int prev[], int dist[])
     }
 }
 
+/*
+ * 克鲁斯卡尔（Kruskal)最小生成树
+ */
+void ListUDG::kruskal()
+{
 
+}
 
+/*
+ * prim最小生成树
+ *
+ * 参数说明：
+ *   start -- 从图中的第start个元素开始，生成最小树
+ */
+void ListUDG::prim(int start)
+{
+
+}
 
 
 }
