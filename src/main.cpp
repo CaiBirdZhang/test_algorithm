@@ -35,6 +35,7 @@ int main()
     cout << "test graph begin....................................................." << endl;
     //test_iterator_matrixUDG();
     //test_iterator_listUDG();
+    //test_iterator_listDG();
     test_dijkstra_listUDG();
     cout << "test graph end....................................................." << endl;
 #endif

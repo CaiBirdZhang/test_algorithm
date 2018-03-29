@@ -387,6 +387,32 @@ void test_iterator_matrixUDG()
     cout << endl << "Martix Graph BFS end: " << endl;
 }
 
+void test_iterator_listDG()
+{
+    char vexs[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
+    char edges[][2] = {
+        {'A', 'G'},
+        {'B', 'A'},
+        {'B', 'D'},
+        {'C', 'F'},
+        {'C', 'G'},
+        {'D', 'E'},
+        {'D', 'F'}};
+    int vlen = sizeof(vexs)/sizeof(vexs[0]);
+    int elen = sizeof(edges)/sizeof(edges[0]);
+    iterator_t::ListDG* pG;
+
+    // 自定义"图"(输入矩阵队列)
+    //pG = new ListDG();
+    // 采用已有的"图"
+    pG = new iterator_t::ListDG(vexs, vlen, edges, elen);
+
+    pG->print();   // 打印图
+    //pG->DFS();     // 深度优先遍历
+    //pG->BFS();     // 广度优先遍历
+    pG->topologicalSort();     // 拓扑排序
+}
+
 void test_dijkstra_listUDG()
 {
     int prev[100] = {0};

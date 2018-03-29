@@ -186,12 +186,5 @@ void ListUDG::print()
     }
 }
 
-// 拓扑排序
-int ListUDG::topologicalSort()
-{
-
-}
-
-
 
 }

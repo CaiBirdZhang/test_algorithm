@@ -1,10 +1,13 @@
-#ifndef ITERATOR_LISTUDG_H
-#define ITERATOR_LISTUDG_H
-
+#ifndef ITERATOR_LISTDG_H
+#define ITERATOR_LISTDG_H
+/**
+ * C++: 无回路有向图(Directed Acyclic Graph)的拓扑排序
+ *      该DAG图是通过邻接表实现的。
+ */
 namespace iterator_t
 {
 // 邻接表
-class ListUDG
+class ListDG
 {
 public:
     static const int MAX = 100;
@@ -32,10 +35,10 @@ private: // 私有成员
 
 public:
     // 创建邻接表对应的图(自己输入)
-    ListUDG();
+    ListDG();
     // 创建邻接表对应的图(用已提供的数据)
-    ListUDG(char vexs[], int vlen, char edges[][2], int elen);
-    ~ListUDG() {}
+    ListDG(char vexs[], int vlen, char edges[][2], int elen);
+    ~ListDG() {}
 
     // 深度优先搜索遍历图
     void DFS();
@@ -43,6 +46,8 @@ public:
     void BFS();
     // 打印邻接表图
     void print();
+    // 拓扑排序
+    int topologicalSort();
 
 private:
     // 读取一个输入字符

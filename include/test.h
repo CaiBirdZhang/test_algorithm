@@ -9,6 +9,7 @@
 
 #include "graph/iterator/ListUDG.h"
 #include "graph/iterator/MatrixUDG.h"
+#include "graph/iterator/ListDG.h"
 #include "graph/dijkstra/ListUDG.h"
 
 // tree
@@ -19,6 +20,7 @@ void test_rbTree();
 // graph
 void test_iterator_listUDG();
 void test_iterator_matrixUDG();
+void test_iterator_listDG();
 void test_dijkstra_listUDG();
 
 // sort
