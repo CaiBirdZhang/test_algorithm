@@ -2,6 +2,7 @@
 #include <iostream>
 #include <queue>
 #include <vector>
+#include <string>
 #include <iomanip>
 
 using namespace std;
@@ -133,7 +134,7 @@ void ListUDG::dijkstra(int vs, int prev[], int dist[])
     dist[vs] = 0;
     // 所有顶点
     int min = INF;
-    int tmpIndex;
+    int tmpIndex = vs;
     for (int i = 1; i < mVexNum; ++i)
     {
         min = INF;
@@ -147,6 +148,7 @@ void ListUDG::dijkstra(int vs, int prev[], int dist[])
             }
         }
         // 标记"顶点tmpIndex"为已经获取到最短路径
+        // 获取某两点的最短距离，可根据tmpIndex是否等于目标值来break
         flag[tmpIndex] = 1;
         //                                     min                getWeight
         // 更新最短路径信息，dis(vs, j) > dis(vs, tmpIndex) + dis(tmpIndex, j)
@@ -197,6 +199,7 @@ void ListUDG::prim(int start)
     // 获取最小生成树
     int sum = 0;
     int* path = new int [mVexNum] ();
+
     // 获取权值
     for (int i = 0; i < mVexNum; ++i)
     {
@@ -206,6 +209,7 @@ void ListUDG::prim(int start)
     weight[start] = 0;
     prim[index++] = mVexs[start].data;
     // 所有顶点
+    int tmpIndex = start;
     for (int i = 0; i < mVexNum; ++i)
     {
         // 由于从start开始的，因此不需要再对第start个顶点进行处理。
@@ -213,7 +217,6 @@ void ListUDG::prim(int start)
             continue;
         // 找出剩余容器中最小的权值
         int min = INF;
-        int tmpIndex = start;
         for (int j = 0; j < mVexNum; ++j)
         {
             if (weight[j] != 0 && weight[j] < min)
@@ -266,7 +269,7 @@ void ListUDG::prim(int start)
     }*/
     cout << "prim sum = " << sum << endl;
     cout << "prim vertex order = " << prim << endl;
-    cout << "prim edge = ";
+    cout << "prim edge length = ";
     for (int i = 0; i < index; ++i)
     {
          cout << path[i] << " ";
