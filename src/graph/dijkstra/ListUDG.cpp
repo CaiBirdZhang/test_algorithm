@@ -190,17 +190,20 @@ void ListUDG::prim(int start)
         return;
     }
     // 权值，距离
-    int dist[mVexNum];
+    int weight[mVexNum];
     // 顶点顺序
     char prim[mVexNum + 1];
     int index = 0;
+    // 获取最小生成树
+    int sum = 0;
+    int* path = new int [mVexNum] ();
     // 获取权值
     for (int i = 0; i < mVexNum; ++i)
     {
-        dist[i] = getWeight(start, i);
+        weight[i] = getWeight(start, i);
     }
     // 起始点
-    dist[start] = 0;
+    weight[start] = 0;
     prim[index++] = mVexs[start].data;
     // 所有顶点
     for (int i = 0; i < mVexNum; ++i)
@@ -213,9 +216,9 @@ void ListUDG::prim(int start)
         int tmpIndex = start;
         for (int j = 0; j < mVexNum; ++j)
         {
-            if (dist[j] != 0 && dist[j] < min)
+            if (weight[j] != 0 && weight[j] < min)
             {
-                min = dist[j];
+                min = weight[j];
                 tmpIndex = j;
             }
         }
@@ -224,20 +227,23 @@ void ListUDG::prim(int start)
         prim[index++] = mVexs[tmpIndex].data;
         // 将"第index个顶点的权值"标记为0，
         // 意味着第index个顶点已经排序过了(或者说已经加入了最小树结果中)。
-        dist[tmpIndex] = 0;
+        weight[tmpIndex] = 0;
+        // 最小生成树结果
+        sum += min;
+        path[i] = min;
+
         // 更新最小权值相关联的节点
         for (int j = 0; j < mVexNum; ++j)
         {
-            int tmp = getWeight(start, tmpIndex);
-            tmp = (tmp == INF ? INF : tmp + min);
-            // dist[start, j] > dist[start, tmpIndex] + dist[tmpIndex, j]
-            if (dist[j] != 0 && dist[j] > tmp)
+            int tmp = getWeight(tmpIndex, j);
+            if (weight[j] != 0 && weight[j] > tmp)
             {
-                dist[j] = tmp;
+                weight[j] = tmp;
             }
         }
     }
-    // 获取最小生成树
+    prim[index] = '\0';
+/*    // 获取最小生成树
     int sum = 0;
     int* path = new int [mVexNum] ();
     prim[index] = '\0';
@@ -257,7 +263,7 @@ void ListUDG::prim(int start)
         }
         sum += min;
         path[i] = min;
-    }
+    }*/
     cout << "prim sum = " << sum << endl;
     cout << "prim vertex order = " << prim << endl;
     cout << "prim edge = ";
