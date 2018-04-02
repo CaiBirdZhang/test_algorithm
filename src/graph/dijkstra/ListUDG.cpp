@@ -116,6 +116,11 @@ int ListUDG::getWeight(int start, int end)
  */
 void ListUDG::dijkstra(int vs, int prev[], int dist[])
 {
+    if (vs >= mVexNum)
+    {
+        cout << "wrong vs." << endl;
+        return;
+    }
     // 每个顶点是否已经找到最短
     int* flag = new int[mVexNum] ();
     // 初始化权值
@@ -179,7 +184,90 @@ void ListUDG::kruskal()
  */
 void ListUDG::prim(int start)
 {
-
+    if (start >= mVexNum)
+    {
+        cout << "wrong start." << endl;
+        return;
+    }
+    // 权值，距离
+    int dist[mVexNum];
+    // 顶点顺序
+    char prim[mVexNum + 1];
+    int index = 0;
+    // 获取权值
+    for (int i = 0; i < mVexNum; ++i)
+    {
+        dist[i] = getWeight(start, i);
+    }
+    // 起始点
+    dist[start] = 0;
+    prim[index++] = mVexs[start].data;
+    // 所有顶点
+    for (int i = 0; i < mVexNum; ++i)
+    {
+        // 由于从start开始的，因此不需要再对第start个顶点进行处理。
+        if(start == i)
+            continue;
+        // 找出剩余容器中最小的权值
+        int min = INF;
+        int tmpIndex = start;
+        for (int j = 0; j < mVexNum; ++j)
+        {
+            if (dist[j] != 0 && dist[j] < min)
+            {
+                min = dist[j];
+                tmpIndex = j;
+            }
+        }
+        // 经过上面的处理后，在未被加入到最小生成树的顶点中，权值最小的顶点是第index个顶点。
+        // 将第index个顶点加入到最小生成树的结果数组中
+        prim[index++] = mVexs[tmpIndex].data;
+        // 将"第index个顶点的权值"标记为0，
+        // 意味着第index个顶点已经排序过了(或者说已经加入了最小树结果中)。
+        dist[tmpIndex] = 0;
+        // 更新最小权值相关联的节点
+        for (int j = 0; j < mVexNum; ++j)
+        {
+            int tmp = getWeight(start, tmpIndex);
+            tmp = (tmp == INF ? INF : tmp + min);
+            // dist[start, j] > dist[start, tmpIndex] + dist[tmpIndex, j]
+            if (dist[j] != 0 && dist[j] > tmp)
+            {
+                dist[j] = tmp;
+            }
+        }
+    }
+    // 获取最小生成树
+    int sum = 0;
+    int* path = new int [mVexNum] ();
+    prim[index] = '\0';
+    for (int i = 1; i < index; ++i)
+    {
+        int pos = getPosition(prim[i]);
+        int min = INF;
+        // 在vexs[0...i]中，找出到j的权值最小的顶点。
+        for (int j = 0; j < i; ++j)
+        {
+            int pos2 = getPosition(prim[j]);
+            int tmp = getWeight(pos, pos2);
+            if (min > tmp)
+            {
+                min = tmp;
+            }
+        }
+        sum += min;
+        path[i] = min;
+    }
+    cout << "prim sum = " << sum << endl;
+    cout << "prim vertex order = " << prim << endl;
+    cout << "prim edge = ";
+    for (int i = 0; i < index; ++i)
+    {
+         cout << path[i] << " ";
+    }
+    cout << endl;
+    cout << "prim definition vertex = " << mVexNum << ", record vertex = " << index << endl;
+    delete path;
 }
 
 

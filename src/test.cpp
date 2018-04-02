@@ -451,15 +451,15 @@ void test_dijkstra_listUDG()
     //pG->BFS();     // 广度优先遍历
     cout << "ListUDG Graph prim begin: " << endl;
     pG->prim(0);   // prim算法生成最小生成树
-    cout << "ListUDG Graph prim end: " << endl;
+    cout << "ListUDG Graph prim end: " << endl << endl;
 
     cout << "ListUDG Graph kruskal begin: " << endl;
     pG->kruskal(); // Kruskal算法生成最小生成树
-    cout << "ListUDG Graph kruskal end: " << endl;
+    cout << "ListUDG Graph kruskal end: " << endl << endl;
 
     cout << "ListUDG Graph dijkstra begin: " << endl;
     // dijkstra算法获取"第4个顶点"到其它各个顶点的最短距离
     pG->dijkstra(3, prev, dist);
-    cout << "ListUDG Graph dijkstra end: " << endl;
+    cout << "ListUDG Graph dijkstra end: " << endl << endl;
 }
 
