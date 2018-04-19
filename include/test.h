@@ -12,6 +12,8 @@
 #include "graph/iterator/ListDG.h"
 #include "graph/dijkstra/ListUDG.h"
 
+#include "strcmp/kmp.h"
+
 // tree
 void test_bst();
 void test_avl();
@@ -25,5 +27,8 @@ void test_dijkstra_listUDG();
 
 // sort
 void test_sort();
+
+// strcmp
+void test_kmp();
 
 #endif

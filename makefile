@@ -6,10 +6,12 @@ DIR_OBJ=./obj
 PATH_GRAPH_ITE=graph/iterator
 PATH_GRAPH_DIJKSTRA=graph/dijkstra
 PATH_SORT=sort
+PATH_STRCMP=strcmp
 
 TARGET=${DIR_BIN}/main
 SRC=${wildcard ${DIR_SRC}/*.cpp} \
-	${wildcard ${DIR_SRC}/${PATH_SORT}/*.cpp}
+	${wildcard ${DIR_SRC}/${PATH_SORT}/*.cpp} \
+    ${wildcard ${DIR_SRC}/${PATH_STRCMP}/*.cpp}
 SRC_GRAPH_ITE=${wildcard ${DIR_SRC}/${PATH_GRAPH_ITE}/*.cpp}
 SRC_GRAPH_DIJKSTRA=${wildcard ${DIR_SRC}/${PATH_GRAPH_DIJKSTRA}/*.cpp}
 
@@ -35,6 +37,9 @@ ${DIR_OBJ}/${PATH_GRAPH_DIJKSTRA}/%.o:${DIR_SRC}/${PATH_GRAPH_DIJKSTRA}/%.cpp
 	${CC} ${CFLAGS} -c $< -o $@
 #compile folder src/sort/
 ${DIR_OBJ}/%.o:${DIR_SRC}/${PATH_SORT}/%.cpp
+	${CC} ${CFLAGS} -c $< -o $@
+#compile folder src/strcmp/
+${DIR_OBJ}/%.o:${DIR_SRC}/${PATH_STRCMP}/%.cpp
 	${CC} ${CFLAGS} -c $< -o $@
 
 clean:

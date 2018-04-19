@@ -463,3 +463,12 @@ void test_dijkstra_listUDG()
     cout << "ListUDG Graph dijkstra end: " << endl << endl;
 }
 
+void test_kmp()
+{
+    char text[] = "abcderghaoirdjgyabcgkgerowgkeogkewowgkerwgkeegfeoojfnbqotyhg";
+    char target[] = "gkerwgkeegf";
+    cout << "current text = " << text << endl;
+    cout << "target text = " << target << endl;
+    int pos = kmp(text, target);
+    cout << "matched pos = " << pos << endl;
+}
